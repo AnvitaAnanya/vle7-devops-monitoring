@@ -19,10 +19,10 @@ pipeline {
         }
 
         stage('Load Image into Minikube') {
-            steps {
-                sh 'minikube image load vle7-web:latest'
-            }
-        }
+    steps {
+        sh 'sudo /usr/local/bin/vle7-load-image'
+    }
+}
 
         stage('Deploy to Kubernetes') {
             steps {
