@@ -1,5 +1,10 @@
+```groovy
 pipeline {
     agent any
+
+    environment {
+        KUBECONFIG = '/var/lib/jenkins/.kube/config'
+    }
 
     options {
         timestamps()
@@ -19,10 +24,10 @@ pipeline {
         }
 
         stage('Load Image into Minikube') {
-    steps {
-        sh 'sudo /usr/local/bin/vle7-load-image'
-    }
-}
+            steps {
+                sh 'sudo -n /usr/local/bin/vle7-load-image'
+            }
+        }
 
         stage('Deploy to Kubernetes') {
             steps {
@@ -33,3 +38,4 @@ pipeline {
         }
     }
 }
+```
