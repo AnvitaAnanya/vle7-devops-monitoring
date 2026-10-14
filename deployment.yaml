@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vle7-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: vle7-web
+  template:
+    metadata:
+      labels:
+        app: vle7-web
+    spec:
+      containers:
+        - name: web
+          image: vle7-web:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vle7-web
+spec:
+  selector:
+    app: vle7-web
+  ports:
+    - port: 80
+      targetPort: 80
+  type: ClusterIP
